@@ -64,8 +64,6 @@ return {
             pickers = {
                 find_files = {
                     hidden = true,
-                    follow = true,
-                    find_command = { "fd", "--type", "f", "--hidden", "--follow", "--no-ignore", "--exclude", "node_modules", "--exclude", ".venv" },
                 },
                 live_grep = {
                     additional_args = function()

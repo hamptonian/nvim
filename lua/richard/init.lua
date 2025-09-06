@@ -1,6 +1,7 @@
 require("richard.remap")
 require("richard.set")
 require("richard.lazy_init")
+require("richard.filetype")
 
 local augroup = vim.api.nvim_create_augroup
 local richard = augroup('richard', {})

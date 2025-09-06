@@ -44,6 +44,7 @@ return {
                 "ruff",
                 "tailwindcss",
                 "marksman",
+                "mdx_analyzer",
                 "ts_ls",
                 "html",
                 "cssls",
