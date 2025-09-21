@@ -16,8 +16,8 @@ return {
 			callback = function()
 				local opts = { buffer = true, silent = true }
 				-- Basic navigation
-				vim.keymap.set("n", "o", "<Plug>(fern-action-open)", opts)
-				vim.keymap.set("n", "<CR>", "<Plug>(fern-action-open)", opts)
+				vim.keymap.set("n", "o", "<Plug>(fern-action-open-or-expand)", opts)
+				vim.keymap.set("n", "<CR>", "<Plug>(fern-action-open-or-expand)", opts)
 				vim.keymap.set("n", "s", "<Plug>(fern-action-open:split)", opts)
 				vim.keymap.set("n", "v", "<Plug>(fern-action-open:vsplit)", opts)
 				vim.keymap.set("n", "t", "<Plug>(fern-action-open:tabedit)", opts)
