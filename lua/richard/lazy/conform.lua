@@ -6,12 +6,20 @@ return {
         require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua" },
-		python = { "ruff" },
-		go = { "gofmt" },
+                python = { "ruff_format" },
+                go = { "gofmt" },
 		html = { "prettier" },
                 javascript = { "prettier" },
                 typescript = { "prettier" },
-            }
+            },
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
+            format_after_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
         })
     end
 }
