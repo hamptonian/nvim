@@ -40,6 +40,10 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+-- Enable case-insensitive search (smartcase: case-sensitive if uppercase is used)
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 -- Enable true color support in the terminal
 vim.opt.termguicolors = true
 
