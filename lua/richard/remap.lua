@@ -205,11 +205,13 @@ vim.keymap.set("n", "<leader>4", function()
 end, { desc = "Harpoon File 4" })
 
 -- ============================================================================
--- PROJECT OPERATIONS (<leader>p*) - ThePrimeagen Style
--- ============================================================================
 
--- Keep existing ThePrimeagen keybindings for backward compatibility
-vim.keymap.set("n", "<leader>pv", ":Fern . -drawer -toggle<CR>", { desc = "Project View (File Explorer)" })
+vim.keymap.set(
+	"n",
+	"<leader>pv",
+	"<cmd>Fern . -drawer -toggle<CR>",
+	{ silent = true, desc = "Project View (File Explorer)" }
+)
 vim.keymap.set("n", "<leader>pf", function()
 	require("telescope.builtin").find_files()
 end, { desc = "Project Find Files" })
