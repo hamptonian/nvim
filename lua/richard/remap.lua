@@ -169,7 +169,7 @@ vim.keymap.set("n", "<C-q>", "<cmd>bdelete<CR>", { desc = "Close Buffer" })
 vim.keymap.set("i", "<C-q>", "<Esc><cmd>bdelete<CR>", { desc = "Close Buffer" })
 
 -- ============================================================================
--- HARPOON 2 - ThePrimeagen Style (Loaded conditionally)
+-- HARPOON 2
 -- ============================================================================
 
 -- Harpoon keybindings - will be set up when harpoon loads
