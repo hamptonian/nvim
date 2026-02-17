@@ -9,6 +9,10 @@ return {
 		ensure_installed = {
 			"stylua",
 			"shfmt",
+			"prettier",
+			"pint",
+			"blade-formatter",
+			"sql-formatter",
 		},
 	},
 	---@param opts MasonSettings | {ensure_installed: string[]}

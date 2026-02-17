@@ -10,10 +10,17 @@ return {
 				html = { "prettier" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
+				astro = { "prettier" },
 				blade = { "blade-formatter" },
-				php = { "prettier" },
+				php = { "pint" },
 				yaml = { "yamlfmt" },
-				vue = { "vue-language-server" },
+				sql = { "sql-formatter" },
+			},
+			formatters = {
+				["sql-formatter"] = {
+					command = "sql-formatter",
+					args = { "--stdin-filepath", "$FILENAME" },
+				},
 			},
 
 			format_on_save = {
