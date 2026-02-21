@@ -1,5 +1,6 @@
 return {
 	"lambdalisue/fern.vim",
+	enabled = false,
 	config = function()
 		-- Disable netrw in favor of Fern
 		vim.g.loaded_netrw = 1

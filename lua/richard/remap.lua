@@ -61,8 +61,12 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next Location Lis
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous Location List Item" })
 
 -- Replace all occurrences of the word under the cursor
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace Word Under Cursor" })
+vim.keymap.set(
+	"n",
+	"<leader>r",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace Word Under Cursor" }
+)
 -- Make the current file executable
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make File Executable" })
 
@@ -112,37 +116,47 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- LSP keymaps (set when LSP attaches to buffer)
 local function setup_lsp_keymaps(e)
-    local opts = { buffer = e.buf }
-    -- Go to definition
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
-        vim.tbl_extend("force", opts, { desc = "Go to Definition" }))
-    -- Show hover information
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end,
-        vim.tbl_extend("force", opts, { desc = "Hover Documentation" }))
-    -- Search for symbols across the entire project
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,
-        vim.tbl_extend("force", opts, { desc = "Workspace Symbol Search" }))
-    -- Open diagnostics
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end,
-        vim.tbl_extend("force", opts, { desc = "Open Diagnostics" }))
-    -- Show contextual code actions, like refactoring and quick fixes
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end,
-        vim.tbl_extend("force", opts, { desc = "Code Actions" }))
-    -- References
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end,
-        vim.tbl_extend("force", opts, { desc = "References" }))
-    -- Rename
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end,
-        vim.tbl_extend("force", opts, { desc = "Rename Symbol" }))
-    -- Show function signature information (in insert mode)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
-        vim.tbl_extend("force", opts, { desc = "Signature Help" }))
-    -- Go to next diagnostic
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end,
-        vim.tbl_extend("force", opts, { desc = "Next Diagnostic" }))
-    -- Go to previous diagnostic
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end,
-        vim.tbl_extend("force", opts, { desc = "Previous Diagnostic" }))
+	local opts = { buffer = e.buf }
+	-- Go to definition
+	vim.keymap.set("n", "gd", function()
+		vim.lsp.buf.definition()
+	end, vim.tbl_extend("force", opts, { desc = "Go to Definition" }))
+	-- Show hover information
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover()
+	end, vim.tbl_extend("force", opts, { desc = "Hover Documentation" }))
+	-- Search for symbols across the entire project
+	vim.keymap.set("n", "<leader>vws", function()
+		vim.lsp.buf.workspace_symbol()
+	end, vim.tbl_extend("force", opts, { desc = "Workspace Symbol Search" }))
+	-- Open diagnostics
+	vim.keymap.set("n", "<leader>vd", function()
+		vim.diagnostic.open_float()
+	end, vim.tbl_extend("force", opts, { desc = "Open Diagnostics" }))
+	-- Show contextual code actions, like refactoring and quick fixes
+	vim.keymap.set("n", "<leader>vca", function()
+		vim.lsp.buf.code_action()
+	end, vim.tbl_extend("force", opts, { desc = "Code Actions" }))
+	-- References
+	vim.keymap.set("n", "<leader>vrr", function()
+		vim.lsp.buf.references()
+	end, vim.tbl_extend("force", opts, { desc = "References" }))
+	-- Rename
+	vim.keymap.set("n", "<leader>vrn", function()
+		vim.lsp.buf.rename()
+	end, vim.tbl_extend("force", opts, { desc = "Rename Symbol" }))
+	-- Show function signature information (in insert mode)
+	vim.keymap.set("i", "<C-h>", function()
+		vim.lsp.buf.signature_help()
+	end, vim.tbl_extend("force", opts, { desc = "Signature Help" }))
+	-- Go to next diagnostic
+	vim.keymap.set("n", "[d", function()
+		vim.diagnostic.goto_next()
+	end, vim.tbl_extend("force", opts, { desc = "Next Diagnostic" }))
+	-- Go to previous diagnostic
+	vim.keymap.set("n", "]d", function()
+		vim.diagnostic.goto_prev()
+	end, vim.tbl_extend("force", opts, { desc = "Previous Diagnostic" }))
 end
 
 -- Export the LSP keymap setup function for use in init.lua
@@ -201,7 +215,7 @@ end, { desc = "Harpoon File 4" })
 -- ============================================================================
 
 -- Keep existing ThePrimeagen keybindings for backward compatibility
-vim.keymap.set("n", "<leader>pv", ":Fern . -drawer -toggle<CR>", { desc = "Project View (File Explorer)" })
+vim.keymap.set("n", "<leader>pv", "<cmd>NvimTreeToggle<CR>", { desc = "Project View (File Explorer)" })
 vim.keymap.set("n", "<leader>pf", function()
 	require("telescope.builtin").find_files()
 end, { desc = "Project Find Files" })
@@ -228,12 +242,24 @@ end, { desc = "Project Recent Files" })
 -- ============================================================================
 
 -- Primary find operations
-vim.keymap.set("n", "<leader>f", function() require('telescope.builtin').find_files() end, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>ff", function() require('telescope.builtin').find_files() end, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>fg", function() require('telescope.builtin').git_files() end, { desc = "Find Git Files" })
-vim.keymap.set("n", "<leader>fb", function() require('telescope.builtin').buffers() end, { desc = "Find Buffers" })
-vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').oldfiles() end, { desc = "Find Recent Files" })
-vim.keymap.set("n", "<leader>fR", function() require('telescope.builtin').resume() end, { desc = "Resume Last Search" })
+vim.keymap.set("n", "<leader>f", function()
+	require("telescope.builtin").find_files()
+end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>ff", function()
+	require("telescope.builtin").find_files()
+end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fg", function()
+	require("telescope.builtin").git_files()
+end, { desc = "Find Git Files" })
+vim.keymap.set("n", "<leader>fb", function()
+	require("telescope.builtin").buffers()
+end, { desc = "Find Buffers" })
+vim.keymap.set("n", "<leader>fr", function()
+	require("telescope.builtin").oldfiles()
+end, { desc = "Find Recent Files" })
+vim.keymap.set("n", "<leader>fR", function()
+	require("telescope.builtin").resume()
+end, { desc = "Resume Last Search" })
 vim.keymap.set("n", "<leader>fw", function()
 	local word = vim.fn.expand("<cword>")
 	require("telescope.builtin").grep_string({ search = word })
@@ -272,6 +298,14 @@ end, { desc = "Live Grep Search" })
 vim.keymap.set("n", "<leader>sg", function()
 	require("telescope.builtin").live_grep()
 end, { desc = "Search Grep" })
+vim.keymap.set("n", "<leader>sG", function()
+	require("telescope.builtin").live_grep({
+		additional_args = function()
+			return { "--glob", "!.git/*" }
+		end,
+		search_dirs = vim.fn.systemlist("git ls-files"),
+	})
+end, { desc = "Search Git Files" })
 vim.keymap.set("n", "<leader>sw", function()
 	local word = vim.fn.expand("<cword>")
 	require("telescope.builtin").grep_string({ search = word })
@@ -280,8 +314,9 @@ vim.keymap.set("n", "<leader>sW", function()
 	local word = vim.fn.expand("<cWORD>")
 	require("telescope.builtin").grep_string({ search = word })
 end, { desc = "Search WORD Under Cursor" })
-vim.keymap.set("n", "<leader>sb", function() require('telescope.builtin').current_buffer_fuzzy_find() end,
-    { desc = "Search Buffer Lines" })
+vim.keymap.set("n", "<leader>sb", function()
+	require("telescope.builtin").current_buffer_fuzzy_find()
+end, { desc = "Search Buffer Lines" })
 
 -- Advanced search operations
 vim.keymap.set("n", "<leader>sr", function()
@@ -317,26 +352,26 @@ end, { desc = "Toggle Word Wrap" })
 
 -- LSP toggles
 vim.keymap.set("n", "<leader>ud", function()
-    if _G.diagnostics_enabled == nil then
-        _G.diagnostics_enabled = true
-    end
+	if _G.diagnostics_enabled == nil then
+		_G.diagnostics_enabled = true
+	end
 
-    if _G.diagnostics_enabled then
-        vim.diagnostic.disable()
-        _G.diagnostics_enabled = false
-        print("Diagnostics disabled")
-    else
-        vim.diagnostic.enable()
-        _G.diagnostics_enabled = true
-        print("Diagnostics enabled")
-    end
+	if _G.diagnostics_enabled then
+		vim.diagnostic.disable()
+		_G.diagnostics_enabled = false
+		print("Diagnostics disabled")
+	else
+		vim.diagnostic.enable()
+		_G.diagnostics_enabled = true
+		print("Diagnostics enabled")
+	end
 end, { desc = "Toggle LSP Diagnostics" })
 
 vim.keymap.set("n", "<leader>ui", function()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-    vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
-    print("Inlay hints " .. (enabled and "disabled" or "enabled"))
+	local bufnr = vim.api.nvim_get_current_buf()
+	local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+	vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+	print("Inlay hints " .. (enabled and "disabled" or "enabled"))
 end, { desc = "Toggle LSP Inlay Hints" })
 
 -- ============================================================================
@@ -390,7 +425,10 @@ vim.keymap.set("n", "<leader>wm", "<cmd>only<CR>", { desc = "Maximize Window" })
 -- MARKS OPERATIONS (<leader>m*) - Marks Navigation
 -- ============================================================================
 
-vim.keymap.set("n", "<leader>m", function() require('telescope.builtin').marks() end, { desc = "Show All Marks" })
+vim.keymap.set("n", "<leader>m", function()
+	require("telescope.builtin").marks()
+end, { desc = "Show All Marks" })
 vim.keymap.set("n", "<leader>M", "<cmd>delmarks a-zA-Z0-9<CR>", { desc = "Delete All Marks in Buffer" })
-vim.keymap.set("n", "<leader>'", function() require('telescope.builtin').marks() end,
-    { desc = "Jump to Mark (Telescope)" })
+vim.keymap.set("n", "<leader>'", function()
+	require("telescope.builtin").marks()
+end, { desc = "Jump to Mark (Telescope)" })
